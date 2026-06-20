@@ -2,6 +2,14 @@ import { Link } from "react-router-dom";
 import { Wifi, MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Footer() {
+  function WhatsApp() {
+    const phoneNumber = "918809253188"; // Replace with your real WhatsApp number
+    const message = "Hello Shaurya eServices, \n\nI need your help!";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsAppLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    return whatsAppLink;
+  }
+
   return (
     <footer className="bg-surface-900 text-surface-300 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +35,7 @@ export default function Footer() {
             </p>
             {/* WhatsApp */}
             <a
-              href="https://wa.me/918540906167?text=Hello%Shaurya%eServices%2C%20I%20need%20help"
+              href={WhatsApp()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
@@ -94,24 +102,26 @@ export default function Footer() {
                   size={14}
                   className="mt-0.5 text-brand-400 flex-shrink-0"
                 />
-                <span>123 Main Road, Near Bus Stand, Patna, Bihar 800001</span>
+                <span>
+                  3 Rai Market, Kharari Road, Baraki Kharari, Rohtas (821113)
+                </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={14} className="text-brand-400 flex-shrink-0" />
                 <a
-                  href="tel:+919999999999"
+                  href="tel:+918809253188"
                   className="hover:text-brand-400 transition-colors"
                 >
-                  +91 99999 99999
+                  +91 88092 53188
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={14} className="text-brand-400 flex-shrink-0" />
                 <a
-                  href="mailto:info@netzone.in"
+                  href="mailto:info@sauryaeservices.in"
                   className="hover:text-brand-400 transition-colors"
                 >
-                  info@netzone.in
+                  info@sauryaeservices.in
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
@@ -120,8 +130,8 @@ export default function Footer() {
                   className="mt-0.5 text-brand-400 flex-shrink-0"
                 />
                 <div>
-                  <div>Mon – Sat: 8:00 AM – 10:00 PM</div>
-                  <div>Sunday: 9:00 AM – 8:00 PM</div>
+                  <div>All days (Mon - Sun)</div>
+                  <div>9:00 AM – 8:00 PM</div>
                 </div>
               </li>
             </ul>
@@ -130,8 +140,7 @@ export default function Footer() {
 
         <div className="border-t border-surface-800 pt-6 text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
           <p>
-            © {new Date().getFullYear()} Shaurya eServices. All rights
-            reserved.
+            © {new Date().getFullYear()} Shaurya eServices. All rights reserved.
           </p>
           <div className="flex gap-4">
             <span className="hover:text-white cursor-pointer transition-colors">
