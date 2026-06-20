@@ -165,14 +165,14 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/services"
-              className="btn-primary text-base px-8 py-3.5 shadow-brand"
+              className="btn-primary self-center text-base px-8 py-3.5 shadow-brand"
             >
               Explore Services <ArrowRight size={18} />
             </Link>
             {!isAuthenticated && (
               <Link
                 to="/register"
-                className="btn-outline text-base px-8 py-3.5 border-white/30 text-white hover:bg-white/10"
+                className="btn-outline self-center text-base px-8 py-3.5 border-white/30 text-white hover:bg-white/10"
               >
                 Create Free Account
               </Link>
@@ -180,7 +180,7 @@ export default function HomePage() {
             {isAuthenticated && (
               <Link
                 to="/booking"
-                className="btn-outline text-base px-8 py-3.5 border-white/30 text-white hover:bg-white/10"
+                className="btn-outline self-center text-base px-8 py-3.5 border-white/30 text-white hover:bg-white/10"
               >
                 Book a PC Slot
               </Link>
@@ -478,13 +478,13 @@ export default function HomePage() {
               <>
                 <Link
                   to="/register"
-                  className="bg-white text-brand-600 font-bold px-8 py-3.5 rounded-xl hover:bg-brand-50 transition-colors inline-flex items-center gap-2"
+                  className="bg-white text-brand-600 self-center font-bold px-8 py-3.5 rounded-xl hover:bg-brand-50 transition-colors inline-flex items-center gap-2"
                 >
                   Register Now <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/contact"
-                  className="border-2 border-white/40 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
+                  className="border-2 border-white/40 text-white self-center font-semibold px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
                 >
                   Contact Us
                 </Link>
