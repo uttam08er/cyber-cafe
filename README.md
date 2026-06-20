@@ -370,5 +370,3 @@ Update the phone number `919999999999` in these files with your actual WhatsApp 
 ## 📝 License
 
 MIT — free to use and modify for commercial projects.
-#   c y b e r - c a f e  
- 
