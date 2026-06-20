@@ -12,7 +12,7 @@ export default {
       appName: "Shaurya eServices",
       colors: {
         brand: {
-          50: "#f0f9ff",
+          50:  "#f0f9ff",
           100: "#e0f2fe",
           200: "#bae6fd",
           300: "#7dd3fc",
@@ -53,7 +53,7 @@ export default {
           730: "#185FA5",
         },
         surface: {
-          50: "#f8fafc",
+          50:  "#f8fafc",
           100: "#f1f5f9",
           200: "#e2e8f0",
           300: "#c6d2e1",
