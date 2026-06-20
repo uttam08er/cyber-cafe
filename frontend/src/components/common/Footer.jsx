@@ -119,6 +119,7 @@ export default function Footer() {
                 <Mail size={14} className="text-brand-400 flex-shrink-0" />
                 <a
                   href="mailto:info@sauryaeservices.in"
+                  target="_blank"
                   className="hover:text-brand-400 transition-colors"
                 >
                   info@sauryaeservices.in

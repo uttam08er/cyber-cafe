@@ -101,7 +101,7 @@ export default function ContactPage() {
                     icon: Mail,
                     label: "Email",
                     value: "info@sauryaeservices.in",
-                    href: "info@sauryaeservices.in",
+                    href: "mailto:info@sauryaeservices.in",
                   },
                   {
                     icon: Clock,
@@ -121,6 +121,7 @@ export default function ContactPage() {
                       {href ? (
                         <a
                           href={href}
+                          target="_blank"
                           className="text-sm text-surface-800 hover:text-brand-600 transition-colors font-medium"
                         >
                           {value}
