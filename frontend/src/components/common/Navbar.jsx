@@ -44,7 +44,7 @@ export default function Navbar() {
             <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center shadow-brand group-hover:bg-brand-700 transition-colors">
               <Wifi size={18} className="text-white" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-0.5">
               <span className="font-bold text-lg leading-4 text-surface-900 font-display">
                 Shaurya
               </span>
