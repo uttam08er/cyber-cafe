@@ -103,7 +103,7 @@ export default function Footer() {
                   className="mt-0.5 text-brand-400 flex-shrink-0"
                 />
                 <span>
-                  3 Rai Market, Kharari Road, Baraki Kharari, Rohtas (821113)
+                  3 Rai Market, Kharari Road, Baraki Kharari, Rohtas Bihar (821113)
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
