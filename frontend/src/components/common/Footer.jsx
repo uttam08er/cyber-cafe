@@ -118,7 +118,7 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail size={14} className="text-brand-400 flex-shrink-0" />
                 <a
-                  href="mailto:info@sauryaeservices.in"
+                  href="mailto:info@shauryaeservices.in"
                   target="_blank"
                   className="hover:text-brand-400 transition-colors"
                 >

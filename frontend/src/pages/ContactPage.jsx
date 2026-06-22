@@ -101,7 +101,7 @@ export default function ContactPage() {
                     icon: Mail,
                     label: "Email",
                     value: "info@sauryaeservices.in",
-                    href: "mailto:info@sauryaeservices.in",
+                    href: "mailto:info@shauryaeservices.in",
                   },
                   {
                     icon: Clock,
