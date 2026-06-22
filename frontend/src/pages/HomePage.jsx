@@ -325,7 +325,9 @@ export default function HomePage() {
             <span className="inline-block text-xs font-bold tracking-widest text-brand-600 uppercase mb-3">
               Meet the Owner
             </span>
-            <h2 className="section-title">The Person Behind Shaurya eServices</h2>
+            <h2 className="section-title">
+              The Person Behind Shaurya eServices
+            </h2>
             <p className="section-subtitle">
               Serving the community with dedication since 2014
             </p>
@@ -369,17 +371,17 @@ export default function HomePage() {
                   <div className="relative w-48 h-48 lg:w-64 lg:h-64 rounded-full border-4 border-white/40 shadow-2xl overflow-hidden bg-brand-100">
                     {/* TO USE A REAL PHOTO — replace the div below with: */}
                     <img
-                      src="/images/michael_dam.jpg"
-                      alt="Michael Dam"
+                      src="/images/profile.png"
+                      alt="Anuj Prasad"
                       className="w-full h-full object-cover"
                     />
                   </div>
 
                   {/* Verified badge */}
-                  <div className="absolute bottom-2 right-2 lg:bottom-5 lg:right-5 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="absolute bottom-3 right-2.5 lg:bottom-5 lg:right-5 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
                     <BadgeCheck
                       size={40}
-                      className="text-brand-100 fill-brand-600"
+                      className="text-brand-50 fill-brand-600"
                     />
                   </div>
                 </div>
@@ -387,7 +389,7 @@ export default function HomePage() {
                 {/* Name + title overlaid on image panel */}
                 <div className="mt-6 text-center text-white">
                   <h3 className="text-2xl font-extrabold font-display">
-                    Michael Dam
+                    Anuj Prasad
                   </h3>
                   <p className="text-brand-200 text-sm font-medium mt-1">
                     Founder & Owner · Shaurya eServices
@@ -411,48 +413,28 @@ export default function HomePage() {
               </h3>
 
               <p className="text-surface-500 leading-relaxed mb-4">
-                I started Shaurya eServices in 2014 with a simple goal — to give everyone
-                in our community access to fast, affordable, and reliable
-                digital services. Back then, getting a document printed meant
-                standing in long queues with no certainty of quality.
+                I started Shaurya eServices in 2014 with a simple goal — to give
+                everyone in our community access to fast, affordable, and
+                reliable digital services. Back then, getting a document printed
+                meant standing in long queues with no certainty of quality.
               </p>
 
               <p className="text-surface-500 leading-relaxed mb-8">
                 Today, we serve hundreds of customers every week — students,
                 professionals, and businesses — with a full range of services
                 and a seamless online booking system that I built from the
-                ground up. I'm proud that Shaurya eServices has become the most trusted
-                name for digital services in our area.
+                ground up. I'm proud that Shaurya eServices has become the most
+                trusted name for digital services in our area.
               </p>
-
-              {/* Stats grid */}
-              {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                {ownerStats.map(({ icon: Icon, value, label }) => (
-                  <div
-                    key={label}
-                    className="flex flex-col items-center text-center p-3 bg-surface-50 rounded-2xl border border-surface-100"
-                  >
-                    <div className="w-9 h-9 bg-brand-50 rounded-xl flex items-center justify-center mb-2">
-                      <Icon size={16} className="text-brand-600" />
-                    </div>
-                    <span className="text-xl font-extrabold font-display text-surface-900">
-                      {value}
-                    </span>
-                    <span className="text-xs text-surface-400 leading-tight mt-0.5">
-                      {label}
-                    </span>
-                  </div>
-                ))}
-              </div> */}
 
               {/* Signature + CTA */}
               <div className="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-surface-100">
                 <div>
-                  <p className="font-signature font-extrabold text-surface-800 text-xl italic">
-                    Michael Dam
+                  <p className="font-signature font-light text-surface-800 text-xl italic">
+                    Anuj Prasad
                   </p>
                   <p className="text-xs text-surface-400 mt-0.5">
-                    Founder, Shaurya eServices
+                    Founder - Shaurya eServices
                   </p>
                 </div>
               </div>
@@ -461,46 +443,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 bg-brand-700">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Wifi size={28} className="text-white" />
-          </div>
-          <h2 className="text-4xl font-extrabold text-white font-display mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-brand-100 text-lg mb-8">
-            Register for free and book services online — no waiting in line.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {!isAuthenticated ? (
-              <>
-                <Link
-                  to="/register"
-                  className="bg-white text-brand-600 self-center font-bold px-8 py-3.5 rounded-xl hover:bg-brand-50 transition-colors inline-flex items-center gap-2"
-                >
-                  Register Now <ArrowRight size={16} />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="border-2 border-white/40 text-white self-center font-semibold px-8 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
-                >
-                  Contact Us
-                </Link>
-              </>
-            ) : (
-              <Link
-                to="/services"
-                className="bg-white text-brand-600 font-bold px-8 py-3.5 rounded-xl hover:bg-brand-50 transition-colors inline-flex items-center gap-2"
+      {/* Stats grid */}
+      <section className="pt-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+            {ownerStats.map(({ icon: Icon, value, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center text-center p-3 rounded-2xl border border-brand-200"
               >
-                Browse Services <ArrowRight size={16} />
-              </Link>
-            )}
+                <div className="w-9 h-9 bg-brand-50 rounded-xl flex items-center justify-center mb-2">
+                  <Icon size={16} className="text-brand-600" />
+                </div>
+                <span className="text-3xl font-bold font-display text-surface-900">
+                  {value}
+                </span>
+                <span className="text-xs text-surface-400 leading-tight mt-0.5">
+                  {label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-      
+
       {/* ── Latest Updates Section ── */}
       <LatestUpdatesSection />
     </div>
@@ -527,9 +493,7 @@ function LatestUpdatesSection() {
       <div className="max-w-6xl mx-auto">
         <div className=" text-center  mb-10">
           <div>
-            <h2 className="section-title">
-              Daily Updates
-            </h2>
+            <h2 className="section-title">Daily Updates</h2>
             <p className="section-subtitle">
               Latest notifications, job alerts & announcements
             </p>
