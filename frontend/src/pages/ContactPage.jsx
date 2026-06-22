@@ -88,7 +88,7 @@ export default function ContactPage() {
                     icon: MapPin,
                     label: "Address",
                     value:
-                      "3 Rai Market, Kharari Road, Baraki Kharari, Rohtas (821113)",
+                      "3 Rai Market, Kharari Road, Baraki Kharari, Rohtas Bihar (821113)",
                     href: null,
                   },
                   {
