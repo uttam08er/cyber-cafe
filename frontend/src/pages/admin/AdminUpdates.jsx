@@ -65,7 +65,6 @@ export default function AdminUpdates() {
   const updates = data?.updates || [];
   const pagination = data?.pagination;
 
-  // ── Handlers ──────────────────────────────────────────────────────────────
   const openCreate = () => {
     setEditTarget(null);
     setForm(EMPTY_FORM);
@@ -177,7 +176,6 @@ export default function AdminUpdates() {
         </div>
       </div>
 
-      {/* Category filter */}
       <div className="flex gap-2 flex-wrap">
         {["", ...CATEGORIES].map((cat) => (
           <button
@@ -197,7 +195,6 @@ export default function AdminUpdates() {
         ))}
       </div>
 
-      {/* Table */}
       {loading ? (
         <LoadingSpinner size="lg" className="py-16" />
       ) : (
@@ -343,7 +340,6 @@ export default function AdminUpdates() {
             </table>
           </div>
 
-          {/* Delete update confirm pop up */}
           <PopUp
             isOpen={!!popUp}
             onClose={() => setPopUp(false)}
@@ -368,7 +364,6 @@ export default function AdminUpdates() {
             )}
           </PopUp>
 
-          {/* Pagination */}
           {pagination && pagination.pages > 1 && (
             <div className="flex justify-center gap-2">
               <button
@@ -393,7 +388,6 @@ export default function AdminUpdates() {
         </>
       )}
 
-      {/* Create / Edit Modal */}
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -416,7 +410,6 @@ export default function AdminUpdates() {
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="label">
               Description <span className="text-red-600">*</span>
@@ -432,7 +425,6 @@ export default function AdminUpdates() {
             />
           </div>
 
-          {/* Category + Link */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label">
@@ -466,7 +458,6 @@ export default function AdminUpdates() {
             </div>
           </div>
 
-          {/* Expires at */}
           <div>
             <label className="label">
               Expires At{" "}
@@ -483,7 +474,6 @@ export default function AdminUpdates() {
             />
           </div>
 
-          {/* Checkboxes */}
           <div className="grid grid-cols-3 gap-4 pt-1">
             {[
               { name: "is_important", label: "Mark as Important" },
@@ -506,7 +496,6 @@ export default function AdminUpdates() {
             ))}
           </div>
 
-          {/* Actions */}
           <div className="flex gap-3 pt-2">
             <button
               type="submit"

@@ -8,12 +8,10 @@ export default function AdminLayout() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-surface-100">
-      {/* Desktop sidebar */}
       <div className="hidden lg:block flex-shrink-0 h-screen overflow-y-auto">
         <AdminSidebar />
       </div>
 
-      {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 top-0 z-40 bg-white/900 backdrop-blur-sm lg:hidden"
@@ -25,9 +23,7 @@ export default function AdminLayout() {
         </div>
       )}
 
-      {/* Main area */}
       <div className="flex-1 flex flex-col min-w-0 h-screen">
-        {/* Mobile topbar */}
         <header className="lg:hidden bg-brand-900 text-white px-4 h-14 flex items-center justify-between">
           <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-surface-800 transition-colors">
             <Menu size={20} />

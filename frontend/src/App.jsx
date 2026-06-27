@@ -38,7 +38,6 @@ import AdminContacts from "./pages/admin/AdminContacts";
 import AdminUpdates from "./pages/admin/AdminUpdates";
 import ScrollToTop from "./components/common/ScrollToTop";
 
-// Layout wrapper for public pages (with Navbar + Footer)
 function PublicLayout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
@@ -54,7 +53,6 @@ export default function App() {
     <AuthProvider>
       <ScrollToTop />
       <Routes>
-        {/* ─── Public routes (with Navbar + Footer) ─── */}
         <Route
           path="/"
           element={
@@ -88,7 +86,6 @@ export default function App() {
           }
         />
 
-        {/* Guest-only routes */}
         <Route
           path="/login"
           element={
@@ -107,7 +104,6 @@ export default function App() {
         />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-        {/* Protected public routes */}
         <Route
           path="/services/apply/:serviceId"
           element={
@@ -129,7 +125,6 @@ export default function App() {
           }
         />
 
-        {/* ─── User dashboard ─── */}
         <Route
           path="/dashboard"
           element={
@@ -146,7 +141,6 @@ export default function App() {
           <Route path="profile" element={<ProfilePage />} />
         </Route>
 
-        {/* ─── Admin panel ─── */}
         <Route
           path="/admin"
           element={
@@ -164,7 +158,6 @@ export default function App() {
           <Route path="updates" element={<AdminUpdates />} />
         </Route>
 
-        {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>

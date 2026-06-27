@@ -230,7 +230,6 @@ export default function AdminServices() {
         </div>
       )}
 
-      {/* Delete service confirm pop up */}
       <PopUp
         isOpen={!!popUp}
         onClose={() => setPopUp(false)}
@@ -255,7 +254,6 @@ export default function AdminServices() {
         )}
       </PopUp>
 
-      {/* Create / Edit Modal */}
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}

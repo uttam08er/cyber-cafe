@@ -10,7 +10,6 @@ class Request(db.Model):
     """Service request model — tracks user service requests."""
     __tablename__ = 'requests'
 
-    # Status constants
     STATUS_PENDING = 'pending'
     STATUS_PROCESSING = 'processing'
     STATUS_COMPLETED = 'completed'
@@ -19,7 +18,6 @@ class Request(db.Model):
 
     VALID_STATUSES = [STATUS_PENDING, STATUS_PROCESSING, STATUS_COMPLETED, STATUS_REJECTED, STATUS_CANCELLED]
 
-    # Who uploaded the current file: 'user' or 'admin'
     FILE_BY_USER  = 'user'
     FILE_BY_ADMIN = 'admin'
 
@@ -29,32 +27,27 @@ class Request(db.Model):
     service_id = db.Column(db.Integer, db.ForeignKey('services.id', ondelete='RESTRICT'), nullable=False)
     status = db.Column(db.String(20), default=STATUS_PENDING, nullable=False)
 
-    # Request details
     notes = db.Column(db.Text, nullable=True)
     quantity = db.Column(db.Integer, default=1)
     total_price = db.Column(db.Numeric(10, 2), nullable=True)
 
-    # File upload — store only filename; physical files live in uploads/
     file_name = db.Column(db.String(255), nullable=True)
     file_path = db.Column(db.String(500), nullable=True)
-    file_size = db.Column(db.BigInteger, nullable=True)   # bytes
+    file_size = db.Column(db.BigInteger, nullable=True)  
     file_type = db.Column(db.String(50), nullable=True)
-    file_uploaded_by = db.Column(db.String(10),  nullable=True)  # 'user' | 'admin'
+    file_uploaded_by = db.Column(db.String(10),  nullable=True) 
 
 
-    # Admin fields
     admin_notes = db.Column(db.Text, nullable=True)
     processed_by = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable=True)
     completed_at = db.Column(db.DateTime, nullable=True)
 
-    # Payment
     payment_status = db.Column(db.String(20), default='unpaid')
     payment_id = db.Column(db.String(100), nullable=True)
 
     created_at = db.Column(db.DateTime(timezone=True), default=utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
-    # Relationship for processed_by admin
     processor = db.relationship('User', foreign_keys=[processed_by])
 
     def to_dict(self, include_user=False, include_service=False):
@@ -71,7 +64,7 @@ class Request(db.Model):
             'file_path': self.file_path,
             'file_size': self.file_size,
             'file_type': self.file_type,
-            'file_uploaded_by': self.file_uploaded_by,   # NEW
+            'file_uploaded_by': self.file_uploaded_by,  
             'admin_notes': self.admin_notes,
             'payment_status': self.payment_status,
             'payment_id': self.payment_id,

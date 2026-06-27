@@ -42,7 +42,6 @@ export default function AdminUsers() {
         </p>
       </div>
 
-      {/* Search */}
       <div className="relative max-w-sm">
         <Search
           size={15}
@@ -192,7 +191,6 @@ export default function AdminUsers() {
         </>
       )}
 
-      {/* User detail modal */}
       <Modal
         isOpen={!!selected}
         onClose={() => setSelected(null)}

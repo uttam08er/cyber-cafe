@@ -16,7 +16,6 @@ import api from "../api/axios";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { getErrorMessage } from "../utils/helpers";
 
-// ── Step indicators ───────────────────────────────────────────────────────────
 const STEPS = [
   { id: 1, label: "Enter Email", icon: Mail },
   { id: 2, label: "Verify OTP", icon: ShieldCheck },
@@ -75,7 +74,6 @@ function StepIndicator({ current }) {
   );
 }
 
-// ── Step 1: Email input ───────────────────────────────────────────────────────
 function StepEmail({ onSuccess }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -102,7 +100,6 @@ function StepEmail({ onSuccess }) {
         </h2>
         <p className="text-surface-400 text-sm mt-1.5">
           Enter your registered email. 
-          {/* <br /> we'll send you a 6-digit OTP. */}
         </p>
       </div>
 
@@ -136,7 +133,6 @@ function StepEmail({ onSuccess }) {
   );
 }
 
-// ── Step 2: OTP input ─────────────────────────────────────────────────────────
 function StepOTP({ email, onSuccess, onBack }) {
   const [digits, setDigits] = useState(["", "", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
@@ -144,7 +140,6 @@ function StepOTP({ email, onSuccess, onBack }) {
   const [countdown, setCountdown] = useState(60);
   const inputRefs = useRef([]);
 
-  // Countdown timer for resend
   useEffect(() => {
     if (countdown <= 0) return;
     const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
@@ -152,7 +147,6 @@ function StepOTP({ email, onSuccess, onBack }) {
   }, [countdown]);
 
   const handleDigit = (idx, val) => {
-    // Accept only single digit
     const digit = val.replace(/\D/g, "").slice(-1);
     const next = [...digits];
     next[idx] = digit;
@@ -227,7 +221,6 @@ function StepOTP({ email, onSuccess, onBack }) {
         <p className="font-semibold text-surface-400 text-sm">{email}</p>
       </div>
 
-      {/* 6-box OTP input */}
       <div>
         <label className="label text-center block">Enter OTP</label>
         <div className="flex gap-2.5 justify-center" onPaste={handlePaste}>
@@ -267,7 +260,6 @@ function StepOTP({ email, onSuccess, onBack }) {
         )}
       </button>
 
-      {/* Resend */}
       <div className="text-center">
         {countdown > 0 ? (
           <p className="text-sm text-surface-400">
@@ -305,7 +297,6 @@ function StepOTP({ email, onSuccess, onBack }) {
   );
 }
 
-// ── Step 3: New password ──────────────────────────────────────────────────────
 function StepNewPassword({ resetToken, onSuccess }) {
   const [form, setForm] = useState({ password: "", confirm: "" });
   const [show, setShow] = useState({ password: false, confirm: false });
@@ -374,7 +365,6 @@ function StepNewPassword({ resetToken, onSuccess }) {
         </p>
       </div>
 
-      {/* New password */}
       <div>
         <label className="label">New Password</label>
         <div className="relative">
@@ -396,7 +386,6 @@ function StepNewPassword({ resetToken, onSuccess }) {
             {show.password ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
         </div>
-        {/* Strength bar */}
         {form.password && (
           <div className="mt-2">
             <div className="flex gap-1 mb-1">
@@ -416,7 +405,6 @@ function StepNewPassword({ resetToken, onSuccess }) {
         )}
       </div>
 
-      {/* Confirm password */}
       <div>
         <label className="label">Confirm Password</label>
         <div className="relative">
@@ -465,7 +453,6 @@ function StepNewPassword({ resetToken, onSuccess }) {
   );
 }
 
-// ── Step 4: Success screen ────────────────────────────────────────────────────
 function StepSuccess() {
   const navigate = useNavigate();
   useEffect(() => {
@@ -501,23 +488,6 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-surface-900 via-brand-900 to-surface-800 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md animate-slide-up">
-        {/* Logo */}
-        {/* <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2.5 mb-4">
-            <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-brand">
-              <Wifi size={20} className="text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg leading-4 text-white font-display">
-                Shaurya
-              </span>
-              <span className="text-xs leading-none text-brand-600 text-start">
-                eServices
-              </span>
-            </div>
-          </Link>
-        </div> */}
-
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           {step < 4 && <StepIndicator current={step} />}
 

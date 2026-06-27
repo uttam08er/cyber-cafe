@@ -10,7 +10,6 @@ import {
   Bell,
 } from "lucide-react";
 
-// ── Category config ───────────────────────────────────────────────────────────
 const CATEGORIES = [
   "All",
   "Govt Forms",
@@ -32,7 +31,6 @@ export default function UpdatesPage() {
   const [pagination, setPagination] = useState(null);
   const [error, setError] = useState(null);
 
-  // Fetch updates
   useEffect(() => {
     const fetchUpdates = async () => {
       setLoading(true);
@@ -46,7 +44,6 @@ export default function UpdatesPage() {
         setUpdates(res?.data[0]?.data?.updates);
         setPagination(res?.data[0]?.data?.pagination);
 
-        // Fetch important notices for marquee (only on page 1 with no filter)
         if (page === 1 && !search && category === "All") {
           const impRes = await updatesAPI.getAll({
             important: true,
@@ -63,7 +60,6 @@ export default function UpdatesPage() {
     fetchUpdates();
   }, [search, category, page]);
 
-  // Reset page on filter change
   const handleCategoryChange = (cat) => {
     setCategory(cat);
     setPage(1);
@@ -75,7 +71,6 @@ export default function UpdatesPage() {
 
   return (
     <div className="min-h-screen bg-surface-50 animate-fade-in">
-      {/* Header */}
       <div className="bg-gradient-to-r from-surface-900 to-brand-900 text-white py-14 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold font-display mb-2">
@@ -87,7 +82,6 @@ export default function UpdatesPage() {
         </div>
       </div>
 
-      {/* Scrolling marquee for important notices */}
       {importantOnes.length > 0 && (
         <div className=" max-w-6xl mx-auto mt-8 ">
           <div className="flex items-center gap-3 bg-brand-700 text-white py-2 px-4 mx-4 overflow-hidden rounded-full">
@@ -111,7 +105,6 @@ export default function UpdatesPage() {
       )}
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Search + Filter */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1">
             <Search
@@ -128,7 +121,6 @@ export default function UpdatesPage() {
           </div>
         </div>
 
-        {/* Category tabs */}
         <div className="flex gap-2 flex-wrap mb-6">
           <Filter
             size={14}
@@ -149,17 +141,14 @@ export default function UpdatesPage() {
           ))}
         </div>
 
-        {/* Error */}
         {error && (
           <div className="card border border-red-200 bg-red-50 text-red-700 text-sm py-4 text-center mb-6">
             {error}
           </div>
         )}
 
-        {/* Loading */}
         {loading && <LoadingSpinner size="lg" className="py-20" />}
 
-        {/* Grid */}
         {!loading && !error && (
           <>
             {updates.length === 0 ? (
@@ -184,7 +173,6 @@ export default function UpdatesPage() {
               </>
             )}
 
-            {/* Pagination */}
             {pagination && pagination.pages > 1 && (
               <div className="flex justify-center gap-2 mt-8">
                 <button
@@ -210,7 +198,6 @@ export default function UpdatesPage() {
         )}
       </div>
 
-      {/* Marquee keyframe injected via style tag */}
       <style>{`
         @keyframes marquee {
           0%   { transform: translateX(100%); }

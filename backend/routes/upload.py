@@ -40,7 +40,6 @@ def upload_file_for_request(request_id):
         allowed = ', '.join(current_app.config.get('ALLOWED_EXTENSIONS', []))
         return jsonify(*error_response(f'File type not allowed. Allowed types: {allowed}'))
 
-    # Check file size (already limited by Flask MAX_CONTENT_LENGTH, but double-check)
     file.seek(0, 2)
     file_size = file.tell()
     file.seek(0)
@@ -49,17 +48,14 @@ def upload_file_for_request(request_id):
     if file_size > max_size:
         return jsonify(*error_response(f'File too large. Maximum size: {max_size // (1024*1024)}MB'))
 
-    # Generate secure unique filename
     original_filename = secure_filename(file.filename)
     ext = original_filename.rsplit('.', 1)[1].lower() if '.' in original_filename else 'bin'
     unique_filename = f"{uuid.uuid4().hex}_{int(datetime.utcnow().timestamp())}.{ext}"
 
-    # Save file
     upload_path = get_upload_path()
     save_path = os.path.join(upload_path, unique_filename)
     file.save(save_path)
 
-    # Delete old file if exists
     if req.file_path:
         old_path = os.path.join(upload_path, req.file_path)
         if os.path.exists(old_path):
@@ -67,7 +63,6 @@ def upload_file_for_request(request_id):
 
     user_role = User.query.with_entities(User.role).filter_by(id=current_user_id).scalar()
     
-    # Update request record
     req.file_name = original_filename
     req.file_path = unique_filename
     req.file_size = file_size
@@ -85,7 +80,6 @@ def upload_file_for_request(request_id):
         201
     ))
 
-# ── Admin: download user's uploaded file ─────────────────────────────────────
 
 @upload_bp.route('/admin/download/<int:request_id>', methods=['GET'])
 @jwt_required()
@@ -112,8 +106,8 @@ def admin_download_user_file(request_id):
 @jwt_required()
 def serve_file(request_id):
     """Serve an uploaded file (authenticated users only)."""
-    current_user_id = int(get_jwt_identity())  # ✅ FIXED
-    user = User.query.get(current_user_id)     # ✅ now gets the correct user
+    current_user_id = int(get_jwt_identity())  
+    user = User.query.get(current_user_id)   
  
     if not user:
         return jsonify(*error_response('User not found', 404))
@@ -128,15 +122,14 @@ def serve_file(request_id):
     return send_from_directory(
         current_app.config['UPLOAD_FOLDER'],
         req.file_path,
-        as_attachment=True,           # ✅ forces download instead of inline display
-        download_name=req.file_name,  # ✅ saves as original name e.g. "document.pdf"
+        as_attachment=True,         
+        download_name=req.file_name,  
     )
 
 @upload_bp.route('/delete/<int:request_id>', methods=['DELETE'])
 @jwt_required()
 def delete_file(request_id):
     """Delete an uploaded file from a request."""
-    # current_user_id = int(get_jwt_identity())
     req = Request.query.get(request_id)
 
     if not req:
@@ -145,13 +138,11 @@ def delete_file(request_id):
     if not req.file_path:
         return jsonify(*error_response('No file attached to this request'))
 
-    # Delete physical file
     upload_folder = current_app.config['UPLOAD_FOLDER']
     file_path = os.path.join(upload_folder, req.file_path)
     if os.path.exists(file_path):
         os.remove(file_path)
 
-    # Clear file fields
     req.file_name = None
     req.file_path = None
     req.file_size = None

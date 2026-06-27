@@ -37,22 +37,16 @@ def get_dashboard():
     print(today)
     week_ago       = today - timedelta(days=7)
 
-    # ── Date ranges for trend comparison ──────────────────────────────────────
-    # This month  = last 30 days  (today-30  →  today)
-    # Last month  = prior 30 days (today-60  →  today-30)
-    # Trend = ((this_month - last_month) / last_month) * 100
     this_month_start = today - timedelta(days=30)
     last_month_start = today - timedelta(days=60)
-    last_month_end   = today - timedelta(days=30)  # = this_month_start
+    last_month_end   = today - timedelta(days=30) 
 
-    # ── User stats ────────────────────────────────────────────────────────────
     total_users    = User.query.filter_by(role='user').count()
     new_users_week = User.query.filter(
         User.role == 'user',
         User.created_at >= week_ago
     ).count()
 
-    # New users this month vs last month → trend
     new_users_this_month = User.query.filter(
         User.role == 'user',
         User.created_at >= this_month_start
@@ -64,7 +58,6 @@ def get_dashboard():
     ).count()
     users_trend = calc_trend(new_users_this_month, new_users_last_month)
 
-    # ── Request stats ─────────────────────────────────────────────────────────
     total_requests      = Request.query.count()
     pending_requests    = Request.query.filter_by(status=Request.STATUS_PENDING).count()
     processing_requests = Request.query.filter_by(status=Request.STATUS_PROCESSING).count()
@@ -79,7 +72,6 @@ def get_dashboard():
     ).count()
     requests_trend = calc_trend(requests_this_month, requests_last_month)
 
-    # ── Booking stats ─────────────────────────────────────────────────────────
     total_bookings    = Booking.query.count()
     upcoming_bookings = Booking.query.filter(
         Booking.booking_date >= today,
@@ -97,7 +89,6 @@ def get_dashboard():
     ).count()
     bookings_trend = calc_trend(bookings_this_month, bookings_last_month)
 
-    # ── Revenue ───────────────────────────────────────────────────────────────
     request_revenue = db.session.query(
         func.sum(Request.total_price)
     ).filter(Request.status == Request.STATUS_COMPLETED).scalar() or 0
@@ -106,7 +97,6 @@ def get_dashboard():
         func.sum(Booking.total_price)
     ).filter(Booking.is_paid == Booking.STATUS_PAID).scalar() or 0
 
-    # Revenue this month vs last month → trend
     revenue_this_month = (
         db.session.query(func.sum(Request.total_price)).filter(
             Request.status == Request.STATUS_COMPLETED,
@@ -133,7 +123,6 @@ def get_dashboard():
     )
     revenue_trend = calc_trend(float(revenue_this_month), float(revenue_last_month))
 
-    # ── Misc ──────────────────────────────────────────────────────────────────
     unread_contacts = Contact.query.filter_by(is_read=False).count()
     recent_requests = Request.query.order_by(Request.created_at.desc()).limit(5).all()
 
@@ -163,7 +152,7 @@ def get_dashboard():
             'total':            total_users,
             'new_this_week':    new_users_week,
             'new_this_month':   new_users_this_month,
-            'trend':            users_trend,       # ✅ NEW — % change vs last month
+            'trend':            users_trend,     
         },
         'requests': {
             'total':            total_requests,
@@ -171,20 +160,20 @@ def get_dashboard():
             'processing':       processing_requests,
             'completed':        completed_requests,
             'this_month':       requests_this_month,
-            'trend':            requests_trend,    # ✅ NEW — % change vs last month
+            'trend':            requests_trend,  
         },
         'bookings': {
             'total':            total_bookings,
             'upcoming':         upcoming_bookings,
             'this_month':       bookings_this_month,
-            'trend':            bookings_trend,    # ✅ NEW — % change vs last month
+            'trend':            bookings_trend, 
         },
         'revenue': {
             'from_requests':    round(float(request_revenue), 2),
             'from_bookings':    round(float(booking_revenue), 2),
             'total':            round(float(request_revenue) + float(booking_revenue), 2),
             'this_month':       round(float(revenue_this_month), 2),
-            'trend':            revenue_trend,     # ✅ NEW — % change vs last month
+            'trend':            revenue_trend,  
         },
         'unread_contacts': unread_contacts,
         'recent_requests': [r.to_dict(include_service=True, include_user=True) for r in recent_requests],

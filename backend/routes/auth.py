@@ -15,8 +15,8 @@ from utils.email import send_otp_email
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
-OTP_EXPIRY_MINUTES   = 10   # OTP valid for 10 minutes
-OTP_COOLDOWN_SECONDS = 60   # sec gap between OTP requests per email
+OTP_EXPIRY_MINUTES   = 10  
+OTP_COOLDOWN_SECONDS = 60  
 
 
 def _generate_otp(length: int = 6) -> str:
@@ -63,8 +63,8 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    access_token = create_access_token(identity=str(user.id))   # ✅ FIXED
-    refresh_token = create_refresh_token(identity=str(user.id)) # ✅ FIXED
+    access_token = create_access_token(identity=str(user.id))  
+    refresh_token = create_refresh_token(identity=str(user.id))
 
     return jsonify(*success_response(
         {
@@ -96,8 +96,8 @@ def login():
     if not user.is_active:
         return jsonify(*error_response('Account has been deactivated. Contact support.', 403))
 
-    access_token = create_access_token(identity=str(user.id))   # ✅ FIXED
-    refresh_token = create_refresh_token(identity=str(user.id)) # ✅ FIXED
+    access_token = create_access_token(identity=str(user.id))   
+    refresh_token = create_refresh_token(identity=str(user.id)) 
 
     return jsonify(*success_response(
         {
@@ -113,12 +113,12 @@ def login():
 @jwt_required(refresh=True)
 def refresh():
     """Get a new access token using refresh token."""
-    current_user_id = get_jwt_identity()          # returns str e.g. "1"
-    user = User.query.get(int(current_user_id))   # ✅ int() for DB query
+    current_user_id = get_jwt_identity()         
+    user = User.query.get(int(current_user_id))   
     if not user or not user.is_active:
         return jsonify(*error_response('User not found or inactive', 404))
 
-    new_token = create_access_token(identity=str(current_user_id))  # ✅ FIXED
+    new_token = create_access_token(identity=str(current_user_id)) 
     return jsonify(*success_response({'access_token': new_token}, 'Token refreshed'))
 
 
@@ -127,7 +127,7 @@ def refresh():
 def get_current_user():
     """Get the current authenticated user's profile."""
     current_user_id = get_jwt_identity()
-    user = User.query.get(int(current_user_id))   # ✅ int() for DB query
+    user = User.query.get(int(current_user_id))  
     if not user:
         return jsonify(*error_response('User not found', 404))
     if not user.is_active:
@@ -140,7 +140,7 @@ def get_current_user():
 def update_profile():
     """Update current user's profile."""
     current_user_id = get_jwt_identity()
-    user = User.query.get(int(current_user_id))   # ✅ int() for DB query
+    user = User.query.get(int(current_user_id))  
     if not user:
         return jsonify(*error_response('User not found', 404))
 
@@ -166,7 +166,7 @@ def update_profile():
 def change_password():
     """Change current user's password."""
     current_user_id = get_jwt_identity()
-    user = User.query.get(int(current_user_id))   # ✅ int() for DB query
+    user = User.query.get(int(current_user_id))  
     if not user:
         return jsonify(*error_response('User not found', 404))
 
@@ -186,7 +186,6 @@ def change_password():
     db.session.commit()
     return jsonify(*success_response(message='Password changed successfully'))
 
-# ─── Forgot Password ─ Step 1: Send OTP ──────────────────────────────────────
 
 @auth_bp.route('/forgot-password', methods=['POST'])
 def forgot_password():
@@ -210,11 +209,9 @@ def forgot_password():
     
     user = User.query.filter_by(email=email, is_active=True).first()
     if not user:
-        # Return success anyway — never reveal whether email exists
         return error_response(message="No account found with this email.",
         status_code=404)
 
-    # Cooldown: prevent sending more than 1 OTP per 60 seconds
     recent = (
         OTP.query
         .filter_by(email=email, is_used=False)
@@ -226,11 +223,9 @@ def forgot_password():
             f'Please wait {OTP_COOLDOWN_SECONDS} seconds before requesting another OTP.', 429
         )
 
-    # Invalidate all previous unused OTPs for this email
     OTP.query.filter_by(email=email, is_used=False).delete()
     db.session.flush()
 
-    # Create and store new OTP
     code = _generate_otp()
     otp  = OTP(
         email      = email,
@@ -240,7 +235,6 @@ def forgot_password():
     db.session.add(otp)
     db.session.commit()
 
-    # Send the email
     sent = send_otp_email(to_email=email, otp_code=code, full_name=user.full_name)
     if not sent:
         db.session.delete(otp)
@@ -252,7 +246,6 @@ def forgot_password():
     return success_response(message=generic_msg)
 
 
-# ─── Forgot Password ─ Step 2: Verify OTP ────────────────────────────────────
 
 @auth_bp.route('/verify-otp', methods=['POST'])
 def verify_otp():
@@ -283,11 +276,9 @@ def verify_otp():
     if otp.code != code:
         return error_response('Incorrect OTP. Please try again.', 400)
 
-    # Mark used so it cannot be reused
     otp.is_used = True
     db.session.commit()
 
-    # Issue a short-lived password-reset JWT
     reset_token = create_access_token(
         identity          = email,
         expires_delta     = timedelta(minutes=15),
@@ -300,7 +291,6 @@ def verify_otp():
     )
 
 
-# ─── Forgot Password ─ Step 3: Reset Password ────────────────────────────────
 
 @auth_bp.route('/reset-password', methods=['POST'])
 def reset_password():
@@ -315,7 +305,6 @@ def reset_password():
     if not valid:
         return error_response(msg)
 
-    # Decode and validate the reset token
     from flask_jwt_extended import decode_token
     try:
         decoded = decode_token(data['reset_token'])
@@ -331,7 +320,6 @@ def reset_password():
     if not email:
         return error_response('Invalid reset token.', 400)
 
-    # Validate password strength
     valid, msg = validate_password(data['new_password'])
     if not valid:
         return error_response(msg)

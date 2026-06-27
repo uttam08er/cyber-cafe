@@ -13,15 +13,11 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # PostgreSQL via DATABASE_URL env var.
-    # Format: postgresql://username:password@host:port/dbname
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL',
         'sqlite:///cybercafe.db',
-        # 'postgresql://postgres:password@localhost:5432/cybercafe'
     )
 
-    # psycopg2 connection pool settings
     SQLALCHEMY_ENGINE_OPTIONS = {
         'pool_size': 5,
         'pool_recycle': 300,

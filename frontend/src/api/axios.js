@@ -22,7 +22,6 @@ api.interceptors.request.use(
 
 let isRedirecting = false;
 
-// Response interceptor: handle token refresh on 401
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -51,7 +50,6 @@ api.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);
         } catch {
-          // Refresh failed — clear everything and go to login once
           if (!isRedirecting) {
             isRedirecting = true;
             localStorage.removeItem("access_token");

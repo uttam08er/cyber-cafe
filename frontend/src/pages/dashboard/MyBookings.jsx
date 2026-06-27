@@ -123,7 +123,6 @@ export default function MyBookings() {
             </div>
           )}
 
-          {/* Cancel booking confirm pop up */}
           <PopUp
             isOpen={!!popUp}
             onClose={() => setPopUp(false)}

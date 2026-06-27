@@ -47,7 +47,6 @@ export default function DashboardPage() {
             </nav>
           </aside>
 
-          {/* Main content */}
           <main className="flex-1 min-w-0">
             <Outlet />
           </main>

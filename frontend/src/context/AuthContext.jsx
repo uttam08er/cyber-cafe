@@ -36,7 +36,6 @@ export function AuthProvider({ children }) {
         if (userData) setUser(userData);
       })
       .catch((err) => {
-        // Only wipe tokens on confirmed 401 — not on network errors or 5xx
         if (err.response?.status === 401) {
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");

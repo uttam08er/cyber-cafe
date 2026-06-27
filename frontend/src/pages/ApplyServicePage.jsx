@@ -51,13 +51,12 @@ export default function ApplyServicePage() {
     }
     setSubmitting(true);
     try {
-      // Step 1: Create the request
       const res = await requestsAPI.create({
         service_id: parseInt(serviceId),
         quantity,
         notes,
       });
-      const newRequest = res?.data?.[0]?.data; // ✅ FIXED — {id, request_number, ...}
+      const newRequest = res?.data?.[0]?.data;
       if (!newRequest?.id) {
         throw new Error("Failed to create request. Please try again.");
       }
@@ -72,7 +71,7 @@ export default function ApplyServicePage() {
         setUploading(false);
       }
 
-      setSuccess(newRequest); // newRequest = {id, request_number, status, ...}
+      setSuccess(newRequest); 
       toast.success("Request submitted successfully!");
     } catch (err) {
       toast.error(getErrorMessage(err));
@@ -174,7 +173,6 @@ export default function ApplyServicePage() {
             Request Details
           </h2>
 
-          {/* Quantity */}
           <div>
             <label className="label">Quantity / Number of Pages</label>
             <input
@@ -195,7 +193,6 @@ export default function ApplyServicePage() {
             </p>
           </div>
 
-          {/* Notes */}
           <div>
             <label className="label">
               Special Instructions{" "}
@@ -210,7 +207,6 @@ export default function ApplyServicePage() {
             />
           </div>
 
-          {/* File Upload */}
           <div>
             <label className="label">
               Upload Document
@@ -282,7 +278,6 @@ export default function ApplyServicePage() {
             )}
           </div>
 
-          {/* Price Summary */}
           <div className="bg-surface-50 rounded-xl p-4 border border-surface-100">
             <div className="flex justify-between text-sm">
               <span className="text-surface-500">

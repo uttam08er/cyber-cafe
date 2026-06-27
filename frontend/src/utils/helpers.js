@@ -1,13 +1,7 @@
-/**
- * Format a number as Indian Rupees
- */
 export function formatCurrency(amount) {
   return `₹ ${Number(amount || 0).toFixed(2)}`
 }
 
-/**
- * Format file size in human-readable form
- */
 export function formatFileSize(bytes) {
   if (!bytes) return '—'
   if (bytes < 1024) return `${bytes} B`
@@ -15,9 +9,6 @@ export function formatFileSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-/**
- * Format an ISO date string to readable date
- */
 export function formatDate(isoString) {
   if (!isoString) return '—'
   return new Date(isoString).toLocaleDateString('en-IN', {
@@ -25,9 +16,6 @@ export function formatDate(isoString) {
   })
 }
 
-/**
- * Format an ISO date string to readable datetime
- */
 export function formatDateTime(isoString) {
   if (!isoString) return '—'
   return new Date(isoString).toLocaleString('en-IN', {
@@ -36,9 +24,6 @@ export function formatDateTime(isoString) {
   })
 }
 
-/**
- * Get status badge class
- */
 export function getStatusClass(status) {
   const map = {
     pending: 'badge-pending',
@@ -52,16 +37,10 @@ export function getStatusClass(status) {
   return map[status] || 'badge'
 }
 
-/**
- * Extract error message from axios error
- */
 export function getErrorMessage(error) {
   return error?.response?.data?.message || error?.message || 'Something went wrong'
 }
 
-/**
- * Truncate a string to max length
- */
 export function truncate(str, max = 60) {
   if (!str) return ''
   return str.length > max ? str.slice(0, max) + '…' : str

@@ -21,7 +21,6 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=utcnow)
     updated_at = db.Column(db.DateTime, default=utcnow, onupdate=utcnow)
 
-    # Relationships
     requests = db.relationship(
         'Request',
         foreign_keys='Request.user_id',

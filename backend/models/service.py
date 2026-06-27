@@ -24,7 +24,6 @@ class Service(db.Model):
     created_at = db.Column(db.DateTime, default=utcnow)
     updated_at = db.Column(db.DateTime, default=utcnow, onupdate=utcnow)
 
-    # Relationships
     requests = db.relationship('Request', backref='service', lazy=True)
 
     def to_dict(self):

@@ -51,7 +51,6 @@ export default function DashboardOverview() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card">
@@ -68,7 +67,6 @@ export default function DashboardOverview() {
         ))}
       </div>
 
-      {/* Quick Actions */}
       <div className="card">
         <h2 className="font-bold text-surface-900 mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -113,7 +111,6 @@ export default function DashboardOverview() {
         </div>
       </div>
 
-      {/* Recent Requests */}
       <div className="card">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-surface-900">Recent Requests</h2>
@@ -164,7 +161,6 @@ export default function DashboardOverview() {
         )}
       </div>
 
-      {/* Recent Bookings */}
       <div className="card">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-surface-900">Recent Bookings</h2>

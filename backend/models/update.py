@@ -8,15 +8,13 @@ class Update(db.Model):
     """Daily updates / notifications model."""
     __tablename__ = 'updates'
 
-    # Category constants
     CAT_GOVERNMENT  = 'Govt Forms'
     CAT_JOBS        = 'Jobs'
     CAT_ADMIT_CARD  = 'Admit Cards'
     CAT_RESULTS     = 'Results'
     CAT_SERVICES    = 'Services'
     CAT_NOTICE      = 'Impt Notice'
-    ALL_CATEGORIES  = [CAT_GOVERNMENT, CAT_JOBS, CAT_ADMIT_CARD,
-                       CAT_RESULTS, CAT_SERVICES, CAT_NOTICE]
+    ALL_CATEGORIES  = [CAT_GOVERNMENT, CAT_JOBS, CAT_ADMIT_CARD, CAT_RESULTS, CAT_SERVICES, CAT_NOTICE]
 
     id           = db.Column(db.Integer,     primary_key=True)
     title        = db.Column(db.String(200), nullable=False)
@@ -25,11 +23,10 @@ class Update(db.Model):
     is_important = db.Column(db.Boolean,     default=False,  nullable=False, index=True)
     is_pinned    = db.Column(db.Boolean,     default=False,  nullable=False, index=True)
     is_active    = db.Column(db.Boolean,     default=True,   nullable=False, index=True)
-    link         = db.Column(db.String(500), nullable=True)   # optional external link
-    expires_at   = db.Column(db.DateTime,    nullable=True)   # auto-expire support
+    link         = db.Column(db.String(500), nullable=True)   
+    expires_at   = db.Column(db.DateTime,    nullable=True)  
     created_at   = db.Column(db.DateTime,    default=utcnow, nullable=False)
-    updated_at   = db.Column(db.DateTime,    default=utcnow,
-                             onupdate=utcnow, nullable=False)
+    updated_at   = db.Column(db.DateTime,    default=utcnow, onupdate=utcnow, nullable=False)
 
     def is_new(self):
         """Returns True if posted within last 3 days."""

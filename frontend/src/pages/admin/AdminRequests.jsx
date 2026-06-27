@@ -30,7 +30,6 @@ const STATUSES = [
 
 const ADMIN_STATUSES = ["pending", "processing", "completed", "rejected"];
 
-// Helper: trigger a browser file download from a blob response
 function triggerDownload(blobData, filename) {
   const url = window.URL.createObjectURL(new Blob([blobData]));
   const link = document.createElement("a");
@@ -60,13 +59,11 @@ export default function AdminRequests() {
     page,
     ...(dateFilter ? { date: dateFilter } : {}),
     ...(statusFilter ? { status: statusFilter } : {}),
-    // ...(serviceFilter ? { service: serviceFilter } : {}),
   };
 
   const { data, loading, refetch } = useFetch(
     () => requestsAPI.adminGetAll(params),
     [page, dateFilter, statusFilter],
-    // , serviceFilter
   );
 
   const requests = data?.requests || [];
@@ -96,7 +93,6 @@ export default function AdminRequests() {
     if (f) setFile(f);
   };
 
-  // ── Download user's uploaded file ──────────────────────────
   const handleDownloadFile = async () => {
     if (!selected?.file_path) return;
     setDownloading(true);
@@ -189,7 +185,6 @@ export default function AdminRequests() {
         </button>
       </div>
 
-      {/* Status filter */}
       <div className="flex flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <input
@@ -321,7 +316,6 @@ export default function AdminRequests() {
         </>
       )}
 
-      {/* Detail Modal */}
       <Modal
         isOpen={!!selected}
         onClose={() => setSelected(null)}
@@ -330,7 +324,6 @@ export default function AdminRequests() {
       >
         {selected && (
           <div className="space-y-5">
-            {/* Info grid */}
             <div className="grid grid-cols-2 gap-3">
               {[
                 ["Service", selected.service?.name],
@@ -362,7 +355,6 @@ export default function AdminRequests() {
               </div>
             )}
 
-            {/* ── File section ── */}
             {selected.file_path && (
               <>
                 <div
@@ -415,7 +407,6 @@ export default function AdminRequests() {
               </>
             )}
 
-            {/* Status update */}
             {selected.status === "cancelled" ? (
               <p className="text-xs text-center border border-red-200 text-red-600 italic bg-red-50 rounded-lg p-2.5 mb-3">
                 <span className="font-semibold">Request cancelled by User</span>
@@ -438,7 +429,6 @@ export default function AdminRequests() {
                   </select>
                 </div>
 
-                {/* File Upload */}
                 {newStatus === "completed" && (
                   <div>
                     {!file ? (
@@ -516,8 +506,6 @@ export default function AdminRequests() {
                   </div>
                 )}
 
-                {/* Payment status paid/unpaid */}
-                {/* <h1>Payment status</h1> */}
 
                 <div>
                   <label className="label">

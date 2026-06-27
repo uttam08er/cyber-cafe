@@ -20,22 +20,18 @@ class Booking(db.Model):
     booking_number = db.Column(db.String(20), unique=True, nullable=False, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
 
-    # Slot details
     computer_number = db.Column(db.Integer, nullable=True)
     booking_date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
     duration_hours = db.Column(db.Numeric(5, 2), nullable=False)
 
-    # Pricing
     price_per_hour = db.Column(db.Numeric(10, 2), default=30.0)
     total_price = db.Column(db.Numeric(10, 2), nullable=False)
 
     status = db.Column(db.String(20), default=STATUS_CONFIRMED)
     purpose = db.Column(db.String(200), nullable=True)
     notes = db.Column(db.Text, nullable=True)
-
-    # Payment
     is_paid = db.Column(db.Boolean, default=False, nullable=False)
 
     created_at = db.Column(db.DateTime, default=utcnow)

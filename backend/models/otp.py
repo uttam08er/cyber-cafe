@@ -12,9 +12,9 @@ class OTP(db.Model):
 
     id         = db.Column(db.Integer,     primary_key=True)
     email      = db.Column(db.String(150), nullable=False, index=True)
-    code       = db.Column(db.String(6),   nullable=False)          # 6-digit OTP
+    code       = db.Column(db.String(6),   nullable=False)        
     is_used    = db.Column(db.Boolean,     nullable=False, default=False)
-    expires_at = db.Column(db.DateTime,    nullable=False)           # set to now + 10 min
+    expires_at = db.Column(db.DateTime,    nullable=False)      
     created_at = db.Column(db.DateTime,    nullable=False, default=datetime.utcnow)
 
     def is_valid(self):

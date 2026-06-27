@@ -64,7 +64,6 @@ export default function MyRequests() {
         </Link>
       </div>
 
-      {/* Status filter tabs */}
       <div className="flex gap-2 overflow-x-auto pb-1">
         {STATUS_TABS.map((s) => (
           <button
@@ -131,7 +130,6 @@ export default function MyRequests() {
             )}
           </PopUp>
 
-          {/* Pagination */}
           {pagination && pagination.pages > 1 && (
             <div className="flex justify-center gap-2 mt-4">
               <button

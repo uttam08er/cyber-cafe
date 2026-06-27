@@ -86,8 +86,6 @@ export default function LoginPage() {
             <div>
               <div className="flex justify-between mb-1.5">
                 <label className="label !mb-0">Password</label>
-                {/* <span className="text-xs text-brand-600 hover:underline cursor-pointer">Forgot password?</span> */}
-                {/* ── Forgot password link — now a real route ── */}
                 <Link
                   to="/forgot-password"
                   className="text-xs text-brand-600 hover:text-brand-700 hover:underline font-medium transition-colors"
@@ -144,12 +142,6 @@ export default function LoginPage() {
               </Link>
             </p>
           </div>
-
-          {/* Demo credentials hint */}
-          {/* <div className="mt-4 bg-brand-50 rounded-xl p-3.5 border border-brand-100">
-            <p className="text-xs text-brand-700 font-semibold mb-1">Demo Admin Login</p>
-            <p className="text-xs text-brand-600 font-mono">admin@cybercafe.com / Admin@123456</p>
-          </div> */}
         </div>
       </div>
     </div>

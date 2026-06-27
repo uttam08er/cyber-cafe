@@ -14,7 +14,6 @@ def get_services():
     category = request.args.get('category')
     query = Service.query
 
-    # Admins see all; public only sees active
     query = query.filter_by(is_active=True)
 
     if category:
@@ -56,10 +55,8 @@ def create_service():
         if field not in data:
             return jsonify(*error_response(f'Field {field} is required'))
 
-    # Generate slug from name
     import re
     slug = re.sub(r'[^a-z0-9]+', '-', data['name'].lower()).strip('-')
-    # Ensure unique slug
     base_slug = slug
     counter = 1
     while Service.query.filter_by(slug=slug).first():
@@ -127,6 +124,6 @@ def delete_service(service_id):
             409  # 409 Conflict
         ))
 
-    db.session.delete(service)  # ✅ Hard delete — removes row from DB
+    db.session.delete(service)
     db.session.commit()
     return jsonify(*success_response('Service deleted', 200))

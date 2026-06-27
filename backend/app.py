@@ -4,7 +4,6 @@ from flask import Flask, jsonify, request
 from config import config
 from extensions import db, jwt, bcrypt, cors, migrate
 
-# # ── Enable detailed logging so the terminal shows WHICH JWT error fires ──────
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -17,10 +16,8 @@ def create_app(config_name=None):
     app = Flask(__name__)
     app.config.from_object(config.get(config_name, config['default']))
 
-    # Ensure upload folder exists
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-    # Initialize extensions
     db.init_app(app)
     jwt.init_app(app)
     bcrypt.init_app(app)
@@ -50,13 +47,11 @@ def create_app(config_name=None):
     app.register_blueprint(updates_bp)
 
 
-    # ── DEBUG: log every request so we can see if the Authorization header
-    # is arriving at the server. Remove this block once the issue is resolved.
+
     @app.before_request
     def log_request_info():
         if request.path.startswith('/api/') and request.method != 'OPTIONS':
             auth_header = request.headers.get('Authorization', 'MISSING')
-            # Only log the first 40 chars of the token so it's readable
             if auth_header != 'MISSING' and len(auth_header) > 40:
                 auth_header = auth_header[:40] + '...'
             logger.debug(
@@ -108,7 +103,6 @@ def seed_database(app):
     from models import User, Service
 
     with app.app_context():
-        # Create admin user
         admin_email = app.config['ADMIN_EMAIL']
         if not User.query.filter_by(email=admin_email).first():
             admin = User(
@@ -121,7 +115,6 @@ def seed_database(app):
             db.session.add(admin)
             print(f'✅ Admin user created: {admin_email}')
 
-        # Create default services
         default_services = [
             {
                 'name': 'Document Printing',

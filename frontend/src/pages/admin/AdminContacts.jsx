@@ -43,7 +43,6 @@ export default function AdminContacts() {
         </button>
       </div>
 
-      {/* Filter */}
       <div className="flex gap-2">
         {[['', 'All'], ['false', 'Unread'], ['true', 'Read']].map(([val, label]) => (
           <button

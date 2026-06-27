@@ -58,7 +58,6 @@ export default function ProfilePage() {
     <div className="animate-fade-in space-y-6">
       <h2 className="font-bold text-surface-900 text-xl font-display">Profile Settings</h2>
 
-      {/* Avatar / info */}
       <div className="card flex items-center gap-4">
         <div className="w-14 h-14 bg-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-brand">
           <span className="text-white font-bold text-xl">{user?.full_name?.[0]?.toUpperCase()}</span>
@@ -70,7 +69,6 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Profile form */}
       <div className="card">
         <div className="flex items-center gap-2 mb-5">
           <User size={16} className="text-brand-600" />
@@ -108,7 +106,6 @@ export default function ProfilePage() {
         </form>
       </div>
 
-      {/* Password form */}
       <div className="card">
         <div className="flex items-center gap-2 mb-5">
           <Lock size={16} className="text-brand-600" />

@@ -53,7 +53,7 @@ export default function ContactPage() {
   };
 
   function WhatsApp() {
-    const phoneNumber = "918809253188"; // Replace with your real WhatsApp number
+    const phoneNumber = "918809253188"; 
     const message = "Hi Shaurya eServices, \n\nI need your assistance!";
     const encodedMessage = encodeURIComponent(message);
     const whatsAppLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -160,7 +160,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact form */}
           <div className="lg:col-span-3">
             {sent ? (
               <div className="card text-center py-12">

@@ -29,7 +29,6 @@ import {
   Legend,
 } from "recharts";
 
-// const PIE_COLORS = ["#f59e0b", "#3b82f6", "#22c55e", "#ef4444", "#6b7280"];
 const PIE_COLORS = ["#ef4444", "#22c55e", "#f59e0b", "#3b82f6", "#6b7280"];
 const GRADIENTS = [
   ["#5eef93ff", "#016927ff"], // green
@@ -102,7 +101,6 @@ export default function AdminDashboard() {
         />
       </div>
 
-      {/* Request status summary */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           {
@@ -147,7 +145,6 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Bar chart: daily requests */}
         <div className="md:col-span-2 card">
           <h2 className="font-bold text-surface-900 mb-4">
             Requests — Last 7 Days
@@ -181,7 +178,6 @@ export default function AdminDashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Pie chart: status distribution */}
         <div className="card">
           <h2 className="font-bold text-surface-900 mb-4">
             Status Distribution
@@ -224,7 +220,6 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Service popularity */}
         <div className="card">
           <h2 className="font-bold text-surface-900 mb-4">Top Services</h2>
           {data.service_popularity.length === 0 ? (
@@ -255,7 +250,6 @@ export default function AdminDashboard() {
           )}
         </div>
 
-        {/* Recent requests */}
         <div className="card">
           <h2 className="font-bold text-surface-900 mb-4">Recent Requests</h2>
           {data.recent_requests.length === 0 ? (

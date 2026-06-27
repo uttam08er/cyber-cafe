@@ -20,7 +20,6 @@ def parse_time(time_str):
     return time(h, m)
 
 
-# ─── Booking Settings (admin) ─────────────────────────────────────────────────
 
 @bookings_bp.route('/settings', methods=['GET'])
 @jwt_required()
@@ -42,7 +41,6 @@ def update_booking_settings():
 
     settings = BookingSettings.get()
 
-    # Validate and apply each field
     if 'max_computers' in data:
         v = int(data['max_computers'])
         if not 1 <= v <= 100:
@@ -81,13 +79,11 @@ def update_booking_settings():
     return jsonify(*success_response(settings.to_dict(), 'Booking settings updated'))
 
 
-# ─── Public / User routes ─────────────────────────────────────────────────────
 
 @bookings_bp.route('/available', methods=['GET'])
 @jwt_required()
 def get_available_slots():
     """Get available computer slots for a given date."""
-    # ── Read live settings from DB instead of hardcoded constants
     s = BookingSettings.get()
 
     booking_date_str = request.args.get('date')
@@ -143,7 +139,7 @@ def get_available_slots():
 def create_booking():
     """Create a new computer slot booking."""
     current_user_id = int(get_jwt_identity())
-    s = BookingSettings.get()          # ── live settings
+    s = BookingSettings.get()        
 
     data = request.get_json()
     if not data:
@@ -273,7 +269,6 @@ def cancel_booking(booking_id):
     return jsonify(*success_response(booking.to_dict(), 'Booking cancelled'))
 
 
-# ─── Admin routes ─────────────────────────────────────────────────────────────
 
 @bookings_bp.route('/admin/all', methods=['GET'])
 @jwt_required()

@@ -82,7 +82,6 @@ def get_request(request_id):
     if not req:
         return jsonify(*error_response('Request not found', 404))
 
-    # Only admin or request owner can view
     if user.role != 'admin' and req.user_id != current_user_id:
         return jsonify(*error_response('Access denied', 403))
 
@@ -110,7 +109,6 @@ def cancel_request(request_id):
     return jsonify(*success_response(req.to_dict(), 'Request cancelled'))
 
 
-# ─── Admin routes ────────────────────────────────────────────────────────────
 
 @requests_bp.route('/admin/all', methods=['GET'])
 @jwt_required()

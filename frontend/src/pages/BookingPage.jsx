@@ -166,7 +166,6 @@ export default function BookingPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-10">
-        {/* Step 1: Date */}
         <div className="card mb-5">
           <h2 className="font-bold text-surface-900 mb-4 flex items-center gap-2">
             <Calendar size={18} className="text-brand-600" /> Step 1: Select
@@ -200,7 +199,6 @@ export default function BookingPage() {
           </div>
         </div>
 
-        {/* Step 2: Slot selection */}
         {slots && (
           <div className="card mb-5">
             <h2 className="font-bold text-surface-900 mb-4 flex items-center gap-2">
@@ -241,7 +239,6 @@ export default function BookingPage() {
           </div>
         )}
 
-        {/* Step 3: PC & Details */}
         {selectedSlot && (
           <form onSubmit={handleSubmit} className="card space-y-5">
             <h2 className="font-bold text-surface-900 flex items-center gap-2">
@@ -249,7 +246,6 @@ export default function BookingPage() {
               & Details
             </h2>
 
-            {/* PC selector */}
             <div>
               <label className="label">Select Computer</label>
               <div className="flex flex-wrap gap-2">
@@ -270,7 +266,6 @@ export default function BookingPage() {
               </div>
             </div>
 
-            {/* Purpose */}
             <div>
               <label className="label">Purpose</label>
               <select
@@ -287,7 +282,6 @@ export default function BookingPage() {
               </select>
             </div>
 
-            {/* Notes */}
             <div>
               <label className="label">Additional Notes (optional)</label>
               <input
@@ -299,7 +293,6 @@ export default function BookingPage() {
               />
             </div>
 
-            {/* Summary */}
             <div className="bg-brand-50 rounded-xl p-4 border border-brand-100 space-y-2 text-sm">
               <h3 className="font-bold text-brand-800 mb-2">Booking Summary</h3>
               {[

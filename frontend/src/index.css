@@ -36,8 +36,6 @@
   .input {
     @apply w-full px-4 py-2.5 border border-surface-300 rounded-xl bg-white text-surface-900
            placeholder-surface-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-transparent;
-    /* transition-all duration-150; */
-    /*focus:outline-none focus:ring-1 focus:border-transparent*/
   }
   .label {
     @apply block text-sm font-semibold text-surface-800 mb-1.5;

@@ -9,7 +9,6 @@ from utils.decorators import admin_required
 updates_bp = Blueprint('updates', __name__, url_prefix='/api/updates')
 
 
-# ─── Public Routes ────────────────────────────────────────────────────────────
 
 @updates_bp.route('/', methods=['GET'])
 def get_updates():
@@ -26,7 +25,6 @@ def get_updates():
 
     query = Update.query.filter_by(is_active=True)
 
-    # Auto-filter expired updates
     query = query.filter(
         (Update.expires_at == None) | (Update.expires_at > datetime.utcnow())
     )
@@ -43,7 +41,6 @@ def get_updates():
     if important == 'true':
         query = query.filter_by(is_important=True)
 
-    # Pinned first, then newest first
     query = query.order_by(Update.is_pinned.desc(), Update.created_at.desc())
 
     paginated = paginate_query(query, page, per_page=per_page)
@@ -84,7 +81,6 @@ def get_update(update_id):
     return success_response(update.to_dict())
 
 
-# ─── Admin Routes ─────────────────────────────────────────────────────────────
 
 @updates_bp.route('/admin/all', methods=['GET'])
 @jwt_required()
@@ -117,7 +113,6 @@ def create_update():
     if not data:
         return jsonify(*error_response('No data provided'))
 
-    # Validate required fields
     for field in ['title', 'description', 'category']:
         if not data.get(field, '').strip():
             return jsonify(*error_response(f'Field "{field}" is required'))
@@ -127,7 +122,6 @@ def create_update():
             f'Invalid category. Must be one of: {", ".join(Update.ALL_CATEGORIES)}'
         ))
 
-    # Parse optional expires_at
     expires_at = None
     if data.get('expires_at'):
         try:

@@ -31,7 +31,7 @@ def validate_password(password):
 def validate_phone(phone):
     """Validate phone number (10-15 digits, optionally with + prefix)."""
     if not phone:
-        return True, None  # phone is optional
+        return True, None
     pattern = r'^\+?[0-9]{10,15}$'
     if not re.match(pattern, phone):
         return False, 'Invalid phone number format'

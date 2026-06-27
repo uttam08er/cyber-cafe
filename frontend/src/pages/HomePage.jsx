@@ -127,7 +127,6 @@ const testimonials = [
   },
 ];
 
-// ── Owner stats shown in the About section ────────────────────────────────────
 const ownerStats = [
   { icon: Clock, value: "10+", label: "Years Experience" },
   { icon: Users, value: "10,000+", label: "Customers Served" },
@@ -140,13 +139,7 @@ export default function HomePage() {
 
   return (
     <div className="animate-fade-in">
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-surface-900 via-brand-900 to-surface-900 text-white py-24 px-4">
-        {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-24 right-24 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-brand-400/5 rounded-full blur-2xl" />
-        </div> */}
         <div className="relative max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse-slow" />
@@ -202,7 +195,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Services Grid ─────────────────────────────────────────────────── */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -241,7 +233,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── How It Works ──────────────────────────────────────────────────── */}
       <section className="py-20 px-4 bg-surface-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -273,7 +264,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -316,11 +306,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── About the Owner ───────────────────────────────────────────────── */}
-      {/* INSERT POINT: between Testimonials and CTA */}
       <section className="py-10 px-4 bg-surface-50 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          {/* Section label */}
           <div className="text-center mb-10">
             <span className="inline-block text-xs font-bold tracking-widest text-brand-600 uppercase mb-3">
               Meet the Owner
@@ -333,15 +320,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Main card — image left, content right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-card border border-surface-200 bg-white">
-            {/* ── Left: Image panel ────────────────────────────────────── */}
             <div className="relative bg-gradient-to-br from-brand-600 to-brand-800 flex items-end justify-center min-h-[360px] lg:min-h-0 overflow-hidden">
-              {/* Background pattern */}
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2" />
-                {/* Grid dots */}
                 <svg
                   className="absolute inset-0 w-full h-full opacity-10"
                   xmlns="http://www.w3.org/2000/svg"
@@ -362,14 +345,10 @@ export default function HomePage() {
                 </svg>
               </div>
 
-              {/* Owner photo — replace src with actual image URL */}
               <div className="relative z-10 flex flex-col items-center py-10 px-8 my-auto">
                 <div className="relative">
-                  {/* Glow ring */}
                   <div className="absolute inset-0 rounded-full bg-white/20 blur-xl scale-110" />
-                  {/* Avatar circle — swap <img> in when you have a photo */}
                   <div className="relative w-48 h-48 lg:w-64 lg:h-64 rounded-full border-4 border-white/40 shadow-2xl overflow-hidden bg-brand-100">
-                    {/* TO USE A REAL PHOTO — replace the div below with: */}
                     <img
                       src="/images/profile.png"
                       alt="Anuj Prasad"
@@ -377,7 +356,6 @@ export default function HomePage() {
                     />
                   </div>
 
-                  {/* Verified badge */}
                   <div className="absolute bottom-3 right-2.5 lg:bottom-5 lg:right-5 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
                     <BadgeCheck
                       size={40}
@@ -386,7 +364,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Name + title overlaid on image panel */}
                 <div className="mt-6 text-center text-white">
                   <h3 className="text-2xl font-extrabold font-display">
                     Anuj Prasad
@@ -401,9 +378,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ── Right: Story + stats ──────────────────────────────────── */}
             <div className="flex flex-col justify-center p-8 lg:p-12">
-              {/* Quote mark */}
               <div className="text-7xl leading-none text-brand-200 font-display font-extrabold mb-2 flip-y select-none">
                 ''
               </div>
@@ -427,7 +402,6 @@ export default function HomePage() {
                 trusted name for digital services in our area.
               </p>
 
-              {/* Signature + CTA */}
               <div className="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-surface-100">
                 <div>
                   <p className="font-signature font-light text-surface-800 text-xl italic">
@@ -443,7 +417,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats grid */}
       <section className="pt-8 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
@@ -467,13 +440,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Latest Updates Section ── */}
       <LatestUpdatesSection />
     </div>
   );
 }
 
-// ── Latest Updates Section (self-contained, fetches its own data) ──────────────
 function LatestUpdatesSection() {
   const [updates, setUpdates] = useState([]);
   const [loading, setLoading] = useState(true);

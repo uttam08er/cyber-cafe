@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-// ── Settings panel ────────────────────────────────────────────────────────────
 
 function BookingSettingsPanel() {
   const [open, setOpen] = useState(false);
@@ -39,7 +38,6 @@ function BookingSettingsPanel() {
     refetch,
   } = useFetch(() => bookingsAPI.getSettings(), []);
 
-  // When the panel opens, seed the form from fetched settings
   const handleOpen = () => {
     if (settings) {
       setForm({
@@ -84,7 +82,6 @@ function BookingSettingsPanel() {
     }
   };
 
-  // ── Collapsed summary strip ───────────────────────────────────────────────
   const Summary = () => {
     if (loading || !settings) return null;
     return (
@@ -127,7 +124,6 @@ function BookingSettingsPanel() {
 
   return (
     <div className="card p-0 overflow-hidden">
-      {/* Header row — always visible */}
       <button
         onClick={open ? handleClose : handleOpen}
         className="w-full flex items-center justify-between px-5 py-4 hover:bg-surface-50 transition-colors animate-fade-in"
@@ -181,7 +177,6 @@ function BookingSettingsPanel() {
                   </p>
                 </div>
 
-                {/* Price per hour */}
                 <div>
                   <label className="label flex items-center gap-1.5">
                     <DollarSign size={13} className="text-brand-500" /> Price
@@ -202,7 +197,6 @@ function BookingSettingsPanel() {
                   </p>
                 </div>
 
-                {/* Max hours per booking */}
                 <div>
                   <label className="label flex items-center gap-1.5">
                     <Layers size={13} className="text-brand-500" /> Max Hours /
@@ -223,7 +217,6 @@ function BookingSettingsPanel() {
                   </p>
                 </div>
 
-                {/* Opening hour */}
                 <div>
                   <label className="label flex items-center gap-1.5">
                     <Clock size={13} className="text-brand-500" /> Opening Hour
@@ -245,7 +238,6 @@ function BookingSettingsPanel() {
                   </p>
                 </div>
 
-                {/* Closing hour */}
                 <div>
                   <label className="label flex items-center gap-1.5">
                     <Clock size={13} className="text-brand-500" /> Closing Hour
@@ -289,7 +281,6 @@ function BookingSettingsPanel() {
                 </div>
               </div>
 
-              {/* Validation warning */}
               {parseInt(form.opening_hour) >= parseInt(form.closing_hour) && (
                 <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2 mb-4">
                   ⚠️ Closing hour must be after opening hour
@@ -324,7 +315,6 @@ function BookingSettingsPanel() {
   );
 }
 
-// ── Main AdminBookings page ───────────────────────────────────────────────────
 import { BanknoteArrowDown } from "lucide-react";
 export default function AdminBookings() {
   const [page, setPage] = useState(1);
@@ -359,7 +349,6 @@ export default function AdminBookings() {
 
   return (
     <div className="space-y-5 animate-fade-in">
-      {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-surface-900 font-display">
@@ -374,10 +363,8 @@ export default function AdminBookings() {
         </button>
       </div>
 
-      {/* ── Booking Settings panel (new) ── */}
       <BookingSettingsPanel />
 
-      {/* Filters */}
       <div className="flex flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <input
@@ -398,21 +385,6 @@ export default function AdminBookings() {
             </button>
           )}
         </div>
-        {/* <select
-          value={statusFilter}
-          onChange={(e) => {
-            setStatusFilter(e.target.value);
-            setPage(1);
-          }}
-          className="input text-sm py-1.5 w-36"
-        >
-          <option value="">All Statuses</option>
-          {["paid", "unpaid"].map((s) => (
-            <option key={s} value={s}>
-              {s.charAt(0).toUpperCase() + s.slice(1)}
-            </option>
-          ))}
-        </select> */}
         <div className="flex items-center gap-2 flex-wrap">
           <Filter size={14} className="text-surface-400" />
           {["", ...STATUSES].map((s) => (
@@ -525,8 +497,6 @@ export default function AdminBookings() {
                           ) : (
                             <CircleX size={18} />
                           )}
-                          {/* {b.is_paid ? <BanknoteArrowDown size={25}/> : <BanknoteX size={25}/>} */}
-                          {/* {b.is_paid ? <p>Paid</p> : <p>Unpaid</p>} */}
                         </button>
                       </td>
                     </tr>
